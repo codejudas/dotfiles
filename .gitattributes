@@ -1,1 +1,1 @@
-test.txt merge=union
+*.txt merge=union
