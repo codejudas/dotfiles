@@ -1,2 +1,15 @@
+[user]
+	email = <email>
+	name = Evan Fossier
+[push]
+	default = simple
 [core]
-    attributesfile = ./.gitattributes
+	editor = vim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[color "diff"]
+	meta = yellow bold
+[alias]
+	unstage = reset HEAD --
+	gone = checkout --
+[hub]
+	host = <github enterprise host if necessary>
