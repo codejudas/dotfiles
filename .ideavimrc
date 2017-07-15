@@ -1,0 +1,23 @@
+"
+" VIMRC for JetBrains based IDEs
+"
+
+" map Shift + H & Shift + L to tab nav
+nnoremap H gT
+nnoremap L gt
+
+" Enable surround plugin
+set surround
+
+" Remap ; to :
+noremap ;; ;
+map ; :
+
+" Leader shortcuts
+let mapleader=","
+
+" ,y to copy to system clipboard
+vnoremap <leader>y "+y
+
+" ,p to paste from system clipboard
+vnoremap <leader>p "+p
