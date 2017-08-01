@@ -1,5 +1,7 @@
+[color]
+    ui = true
 [user]
-	email = <email>
+	email = evan.fossier@gmail.com
 	name = Evan Fossier
 [push]
 	default = simple
@@ -11,5 +13,5 @@
 [alias]
 	unstage = reset HEAD --
 	gone = checkout --
-[hub]
-	host = <github enterprise host if necessary>
+[include]
+    path = ./.gitconfig-twilio
