@@ -1,0 +1,9 @@
+[submodule "powerline-fonts"]
+	path = powerline-fonts
+	url = https://github.com/powerline/fonts.git
+[submodule "pycharm-themes"]
+	path = pycharm-themes
+	url = git://github.com/d1ffuz0r/pycharm-themes.git
+[submodule "idea-one-dark-theme"]
+	path = idea-one-dark-theme
+	url = https://github.com/yurtaev/idea-one-dark-theme

@@ -9,6 +9,9 @@ nnoremap L gt
 " Enable surround plugin
 set surround
 
+" Add characters to be considered word boundaries
+set iskeyword-=_
+
 " Remap ; to :
 noremap ;; ;
 map ; :

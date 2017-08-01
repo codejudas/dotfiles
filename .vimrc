@@ -15,6 +15,9 @@ set title                                   " show file title in terminal tab
 set wildmenu
 set lazyredraw
 
+" Add characters to be considered word boundaries
+set iskeyword-=_
+
 set updatetime=1000                         " update time for git gutter plugin.
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.class,*.pdf
