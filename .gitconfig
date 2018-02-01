@@ -13,5 +13,6 @@
 [alias]
 	unstage = reset HEAD --
 	gone = checkout --
+	praise = blame
 [include]
     path = ./.gitconfig-twilio

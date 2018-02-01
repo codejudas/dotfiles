@@ -9,7 +9,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotne
 export PYTHONPATH="./:${PYTHONPATH}"
 
 #Java home
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home"
 
 # Hide builtin venv prompt
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -69,7 +69,7 @@ ZSH_THEME="amuse-me"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git jsontools zsh-autosuggestions)
+plugins=(git jsontools zsh-autosuggestions encode64)
 
 # User configuration
 
@@ -110,7 +110,10 @@ alias watch="watch --color"
 alias git="hub"
 alias chrome="open -a Google\ Chrome"
 
+
 alias ls='ls -G -F -L -a -P -h'
+alias rm='rm -v'
+
 alias vimsplit='vim -O'
 
 # GIT ALIASES
@@ -123,8 +126,30 @@ alias push='git push'
 alias fetch='git fetch'
 alias branch='git branch'
 alias checkout='git checkout'
+alias cherry-pick='git cherry-pick'
+alias stash='git stash'
 alias drop='git checkout -- '
-alias dropall='git checkout -- . && git clean -fd'
+alias ag='ag --mmap'
+
+#GIT: Add upstream as a remote, copy of origin
+alias git-add-upstream="git remote -v | grep 'origin' | grep 'push' | awk '{print \$2;}' | xargs -I {} -p git remote add upstream {}"
+
+# GIT: Pull then push at same time
+function pull-push {
+    git pull $@ && git push $@
+}
+
+# dropall command which asks for confirmation first
+function dropall {
+    directory=`basename $(pwd)`
+    echo "Discard all changes in '$directory'? "
+    read -rs -k 1 ans
+    echo
+    if [[ $ans =~ ^[Yy]$ ]]
+    then
+        git reset HEAD . && git checkout -- . && git clean -fd
+    fi
+}
 
 # create lcd command which does a cd then an ls
 function cl {
@@ -143,11 +168,12 @@ fi
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Open vim with ctrl-p by hitting ctrl-p from cmd line
-launch_ctrlp() {
-        </dev/tty vim -c CtrlP
-    }
-zle -N launch_ctrlp
-bindkey "^p" launch_ctrlp
+# Disabled so it doesnt conflict with ctrl-p & ctrl-n for navigating bash history
+# launch_ctrlp() {
+#         </dev/tty vim -c CtrlP
+#     }
+# zle -N launch_ctrlp
+# bindkey "^p" launch_ctrlp
 
 export PATH="/usr/local/sbin:$PATH"
 
@@ -167,6 +193,9 @@ eval "$(pyenv init -)"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+## RBENV
+eval "$(rbenv init -)"
 
-
-
+## Setup Z (autojump)
+. ~/Code/z/z.sh
+_Z_EXCLUDE_DIRS=('/Users/efossier/Code/twilio/librarian/')

@@ -47,6 +47,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'isRuslan/vim-es6'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 " Remap ; to :
@@ -67,6 +68,10 @@ set backspace=indent,eol,start
 
 " Disable \" concealment in json files
 let g:vim_json_syntax_conceal = 0
+
+" Override default conceal level only for indentLine
+let g:conceallevel=0
+let g:indentLine_setConceal = 0
 
 " CTRL P File Filtering""
 let g:ctrlp_user_command = {
