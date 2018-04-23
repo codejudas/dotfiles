@@ -156,6 +156,12 @@ function cl {
     builtin cd "$@" && ls -GF
 }
 
+# Command that returns the currently checked out branch
+function curbranch {
+    git branch | grep "*" | awk '{print $2}'
+}
+alias cb='curbranch'
+
 #start in specific directory
 if [[ $PWD = $HOME ]]; then
     cd ~/Code/twilio
@@ -199,3 +205,12 @@ eval "$(rbenv init -)"
 ## Setup Z (autojump)
 . ~/Code/z/z.sh
 _Z_EXCLUDE_DIRS=('/Users/efossier/Code/twilio/librarian/')
+
+## PHP Version stuff
+alias php70="$(brew --prefix homebrew/php/php70)/bin/php"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/efossier/Code/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/efossier/Code/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/efossier/Code/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/efossier/Code/google-cloud-sdk/completion.zsh.inc'; fi
