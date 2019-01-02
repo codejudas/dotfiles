@@ -73,6 +73,9 @@ let g:vim_json_syntax_conceal = 0
 let g:conceallevel=0
 let g:indentLine_setConceal = 0
 
+" Ignore some files
+set wildignore+=*.so,*.swp,*.zip,*/node_modules/*
+
 " CTRL P File Filtering""
 let g:ctrlp_user_command = {
   \ 'types': {
@@ -82,3 +85,4 @@ let g:ctrlp_user_command = {
   \ 'fallback': 'find %s -type f'
   \ }
 
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'

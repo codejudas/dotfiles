@@ -125,6 +125,7 @@ alias pull='git pull'
 alias push='git push'
 alias fetch='git fetch'
 alias branch='git branch'
+alias clone='git clone'
 alias checkout='git checkout'
 alias cherry-pick='git cherry-pick'
 alias stash='git stash'
@@ -151,7 +152,7 @@ function dropall {
     fi
 }
 
-# create lcd command which does a cd then an ls
+# create cl command which does a cd then an ls
 function cl {
     builtin cd "$@" && ls -GF
 }
@@ -161,6 +162,16 @@ function curbranch {
     git branch | grep "*" | awk '{print $2}'
 }
 alias cb='curbranch'
+
+# Utility to join a list of things with each element on new lines into a single line
+function ljoin {
+    tr '\n' "$1" | sed "s/$1$//g"
+}
+
+# Utility to take a flat json string from clipboard, format it and put it back in clipboard
+function pbjson {
+    pbpaste | jq . | tee /dev/tty | pbcopy
+}
 
 #start in specific directory
 if [[ $PWD = $HOME ]]; then
@@ -182,11 +193,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # bindkey "^p" launch_ctrlp
 
 export PATH="/usr/local/sbin:$PATH"
-
-# Owl
-export OWL=/Users/efossier/Code/twilio/owl
-eval "$(/Users/efossier/Code/twilio/owl/bin/owl init -)"
-
 
 ## PYENV Stuff
 eval $(/usr/libexec/path_helper -s)
@@ -214,3 +220,15 @@ if [ -f '/Users/efossier/Code/google-cloud-sdk/path.zsh.inc' ]; then source '/Us
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/efossier/Code/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/efossier/Code/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Pretty display of csv files in terminal
+function csview {
+    perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' "$@" | column -t -s, | less  -F -S -X -K
+}
+
+# CLI syntax highlighting
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Spark env
+export SPARK_LOCAL_IP="127.0.0.1" 
