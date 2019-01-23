@@ -15,7 +15,7 @@ export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Ho
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # Twilio
-source ~/.zshrc-twilio
+if [ -f '~/.zshrc-twilio' ]; then source '~/.zshrc-twilio'; fi
 
 # Require 3 Ctrl-D in a row to exit
 IGNOREEOF=3
@@ -76,6 +76,7 @@ plugins=(git jsontools zsh-autosuggestions encode64)
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+if [ -f "$ZSH/oh-my-zsh.sh" ]; then source "$ZSH/oh-my-zsh.sh"; fi
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
