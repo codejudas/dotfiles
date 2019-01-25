@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/efossier/.oh-my-zsh
+export ZSH=/Users/$USER/.oh-my-zsh
 export TERM="xterm-256color"
 
 # Base Path
@@ -211,16 +211,16 @@ eval "$(rbenv init -)"
 
 ## Setup Z (autojump)
 . ~/Code/z/z.sh
-_Z_EXCLUDE_DIRS=('/Users/efossier/Code/twilio/librarian/')
+_Z_EXCLUDE_DIRS=("/Users/$USER/Code/twilio/librarian/")
 
 ## PHP Version stuff
 alias php70="$(brew --prefix homebrew/php/php70)/bin/php"
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/efossier/Code/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/efossier/Code/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "/Users/$USER/Code/google-cloud-sdk/path.zsh.inc" ]; then source "/Users/$USER/Code/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/efossier/Code/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/efossier/Code/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "/Users/$USER/Code/google-cloud-sdk/completion.zsh.inc" ]; then source "/Users/$USER/Code/google-cloud-sdk/completion.zsh.inc"; fi
 
 # Pretty display of csv files in terminal
 function csview {
