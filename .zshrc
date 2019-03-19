@@ -9,7 +9,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotne
 export PYTHONPATH="./:${PYTHONPATH}"
 
 #Java home
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home"
+export JAVA_HOME="$(/usr/libexec/java_home)"
 
 # Hide builtin venv prompt
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -207,14 +207,11 @@ eval "$(pyenv init -)"
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ## RBENV
-eval "$(rbenv init -)"
+[ -x "$(command -v rbenv)" ] && eval "$(rbenv init -)"
 
 ## Setup Z (autojump)
 . ~/Code/z/z.sh
 _Z_EXCLUDE_DIRS=("/Users/$USER/Code/twilio/librarian/")
-
-## PHP Version stuff
-alias php70="$(brew --prefix homebrew/php/php70)/bin/php"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "/Users/$USER/Code/google-cloud-sdk/path.zsh.inc" ]; then source "/Users/$USER/Code/google-cloud-sdk/path.zsh.inc"; fi
