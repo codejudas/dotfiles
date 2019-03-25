@@ -140,6 +140,7 @@ alias git-add-upstream="git remote -v | grep 'origin' | grep 'push' | awk '{prin
 function pull-push {
     git pull $@ && git push $@
 }
+alias pp="pull-push"
 
 # dropall command which asks for confirmation first
 function dropall {
@@ -174,14 +175,8 @@ function pbjson {
     pbpaste | jq . | tee /dev/tty | pbcopy
 }
 
-#start in specific directory
-if [[ $PWD = $HOME ]]; then
-    cd ~/Code/twilio
-fi
-
 # autojump
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
-
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -212,12 +207,6 @@ eval "$(pyenv init -)"
 ## Setup Z (autojump)
 . ~/Code/z/z.sh
 _Z_EXCLUDE_DIRS=("/Users/$USER/Code/twilio/librarian/")
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "/Users/$USER/Code/google-cloud-sdk/path.zsh.inc" ]; then source "/Users/$USER/Code/google-cloud-sdk/path.zsh.inc"; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f "/Users/$USER/Code/google-cloud-sdk/completion.zsh.inc" ]; then source "/Users/$USER/Code/google-cloud-sdk/completion.zsh.inc"; fi
 
 # Pretty display of csv files in terminal
 function csview {
