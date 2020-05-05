@@ -14,9 +14,6 @@ export JAVA_HOME="$(/usr/libexec/java_home)"
 # Hide builtin venv prompt
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# Twilio
-if [ -f '~/.zshrc-twilio' ]; then source '~/.zshrc-twilio'; fi
-
 # Require 3 Ctrl-D in a row to exit
 IGNOREEOF=3
 set -o ignoreeof
@@ -122,6 +119,7 @@ alias gs='git status'
 alias gf='git fetch'
 alias add='git add'
 alias commit='git commit'
+alias remotes='git remote -v'
 alias pull='git pull'
 alias push='git push'
 alias fetch='git fetch'
@@ -130,8 +128,9 @@ alias clone='git clone'
 alias checkout='git checkout'
 alias cherry-pick='git cherry-pick'
 alias stash='git stash'
-alias drop='git checkout -- '
 alias ag='ag --mmap'
+alias log='git log'
+alias drop='git checkout -- '
 
 #GIT: Add upstream as a remote, copy of origin
 alias git-add-upstream="git remote -v | grep 'origin' | grep 'push' | awk '{print \$2;}' | xargs -I {} -p git remote add upstream {}"
@@ -168,6 +167,11 @@ alias cb='curbranch'
 # Utility to join a list of things with each element on new lines into a single line
 function ljoin {
     tr '\n' "$1" | sed "s/$1$//g"
+}
+
+# Utility to join a list of things with each element on new lines into a single line
+function quote {
+    awk '{ print "\""$0"\"" }'
 }
 
 # Utility to take a flat json string from clipboard, format it and put it back in clipboard
@@ -213,9 +217,33 @@ function csview {
     perl -pe 's/((?<=,)|(?<=^)),/ ,/g;' "$@" | column -t -s, | less  -F -S -X -K
 }
 
+# Clean up merged branches
+merged_branches() {
+  local current_branch=$(git rev-parse --abbrev-ref HEAD)
+  for branch in $(git branch --merged | cut -c3-)
+    do
+      if [[ $branch =~ ^master$ ]]; then
+        continue
+      fi
+
+      echo "Branch $branch is already merged into $current_branch."
+      echo "Would you like to delete it? [Y]es/[N]o "
+      read REPLY
+      if [[ $REPLY =~ ^[Yy] ]]; then
+        git branch -d $branch
+      fi
+  done
+}
+
 # CLI syntax highlighting
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Spark env
 export SPARK_LOCAL_IP="127.0.0.1" 
+
+# Twilio
+if [ -f "$HOME/.zshrc-twilio" ]; then source "$HOME/.zshrc-twilio"; fi
+
+# Fun
+fortune | cowsay
