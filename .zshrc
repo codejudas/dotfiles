@@ -131,7 +131,6 @@ alias checkout='git checkout'
 alias cherry-pick='git cherry-pick'
 alias stash='git stash'
 alias drop='git checkout -- '
-alias ag='ag --mmap'
 
 #GIT: Add upstream as a remote, copy of origin
 alias git-add-upstream="git remote -v | grep 'origin' | grep 'push' | awk '{print \$2;}' | xargs -I {} -p git remote add upstream {}"
@@ -219,3 +218,15 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Spark env
 export SPARK_LOCAL_IP="127.0.0.1" 
+
+# Android
+export ANDROID_SDK=$HOME/Library/Android/sdk
+export ANDROID_HOME="$ANDROID_SDK"
+export PATH=$ANDROID_SDK/emulator:$ANDROID_SDK/tools:$PATH
+export PATH=$ANDROID_SDK/platform-tools:$ANDROID_SDK/emulator:$ANDROID_SDK/tools:$PATH
+
+# Convert a flac to MP3
+function flac2mp3 {
+    mp3name=$(echo $1 | sed 's/\.flac/\.mp3/')
+    ffmpeg -i "$1" -ab 320k -map_metadata 0 -id3v2_version 3 "$mp3name"
+}
