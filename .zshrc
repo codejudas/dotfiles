@@ -128,11 +128,8 @@ alias clone='git clone'
 alias checkout='git checkout'
 alias cherry-pick='git cherry-pick'
 alias stash='git stash'
-<<<<<<< HEAD
-=======
 alias ag='ag --mmap'
 alias log='git log'
->>>>>>> 845171bafbcd1a0bd45dd8db9103aa43b2375420
 alias drop='git checkout -- '
 
 #GIT: Add upstream as a remote, copy of origin
